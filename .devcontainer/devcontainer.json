@@ -1,0 +1,21 @@
+{
+	"name": "hypertools",
+	"context": "..",
+	"dockerFile": "Dockerfile",
+	"postCreateCommand": "cd $WORKSPACE && poetry install",
+	"customizations": {
+		"vscode": {
+			"settings": {
+				"python.venvPath": "/root/.cache/pypoetry/virtualenvs"
+			},
+			"extensions": [
+				"ms-python.black-formatter",
+                "ms-python.python",
+                "ms-python.flake8",
+                "ms-python.isort",
+                "ms-python.mypy-type-checker",
+                "ms-python.vscode-pylance"
+			]
+		}
+	}
+}
