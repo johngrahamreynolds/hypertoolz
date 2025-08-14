@@ -1,7 +1,7 @@
 FROM python:3.12-slim-bookworm
 
 # Set Workspace directory
-ARG WORKSPACE=/workspaces/HyperparameterTools
+ARG WORKSPACE=/workspaces/hypertoolz
 ENV WORKSPACE=${WORKSPACE}
 
 # Set an argument for the Poetry version

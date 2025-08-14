@@ -1,5 +1,5 @@
 {
-	"name": "hypertools",
+	"name": "hypertoolz",
 	"context": "..",
 	"dockerFile": "Dockerfile",
 	"postCreateCommand": "cd $WORKSPACE && poetry install",
