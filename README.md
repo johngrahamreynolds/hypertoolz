@@ -1,4 +1,4 @@
-# Hyperparameter Tools
+# Hypertoolz
 
 The `hypertoolz` package houses a set of simple, reusable modules for efficiently running hyperparameter tuning with Optuna on reinforcement learning optimization problems. 
 
