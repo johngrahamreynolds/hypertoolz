@@ -1,0 +1,39 @@
+{
+    "files.exclude": {
+        "**/__pycache__": true,
+        "**/.git": true,
+        "**/.pytest_cache": true
+    },
+    "[json]": {
+        "editor.formatOnSave": false
+    },
+    "[dockerfile]": {
+        "editor.formatOnSave": false
+    },
+    "editor.codeActionsOnSave": {
+        "source.organizeImports": "explicit"
+    },
+    "editor.formatOnSave": true,
+    "[python]": {
+        "diffEditor.ignoreTrimWhitespace": false,
+        "editor.formatOnType": true,
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "ms-python.black-formatter"
+    },
+    "mypy-type-checker.args": [
+        "--config-file=${workspaceFolder}/spark/mypy.ini"
+    ],
+    "flake8.args": [
+        "--config=${workspaceFolder}/spark/.flake8",
+        "--max-line-length=120"
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true,
+    "python.terminal.activateEnvInCurrentTerminal": false,
+    "python.terminal.activateEnvironment": false,
+    "python.testing.pytestArgs": [
+        "-o",
+        "junit_family=xunit1"
+    ],
+    "python.languageServer": "Pylance"
+}
