@@ -28,6 +28,9 @@ class TunerConfig:
             Number of evaluation episodes
         timeout (`int`, *optional*, defaults to 15 minutes (`int(60*15)`))
             Tuning timeout time.
+        param_dict ('dict` *optional*, defaults to `None`)
+            A dictionary of the above parameters to be passed to the model for object instatiation. Params passed explicitly in the constructor \
+            take precedence over params passed in the `param_dict`. Likewise, params not passed in the dict take their default values.
 
 
     Examples:
@@ -38,8 +41,16 @@ class TunerConfig:
     >>> # Initialize the TunerConfig with all the default parameters
     >>> config = TunerConfig()
 
-    >>> Initialize a TunerConfig with chosen parameters to outline your hyperparameter tuning (not all options displayed)
-    >>> specific_config = TunerConfig(num_trials=50, num_jobs=2, evaluations=5, budget=50000)
+    >>> Initialize a TunerConfig with chosen parameters passed directly to the constructor
+    >>> config = TunerConfig(num_trials=50, num_jobs=2, evaluations=5, budget=50000)
+
+    >>> Initialize a TunerConfig with chosen parameters passed as a Python dictionary
+    >>> config_dict = { 'num_trials': 200, 'num_jobs': 8,'budget': 100000}
+    >>> config = TunerConfig(param_dict=config_dict)
+
+    >>> A mixture of the two methods above. Params passed explicity to the constructor take precedence
+    >>> config_dict = { 'num_trials': 200, 'num_jobs': 8,'budget': 100000}
+    >>> config = TunerConfig(param_dict=config_dict, num_trials=150) # config.num_trials = 150
 
     >>> Initialize a TunerConfig with chosen parameters from a yaml file
     >>> yaml_config = TunerConfig.from_yaml("/path/to/your_yaml.yaml")
@@ -58,16 +69,79 @@ class TunerConfig:
         num_eval_envs: Optional[int] = 5,
         num_eval_eps: Optional[int] = 10,
         timeout: Optional[int] = int(15 * 60),
+        param_dict: Optional[Dict[str, Any]] = None,
     ):
-        self.num_trials = num_trials
-        self.num_jobs = num_jobs
-        self.startup_trials = startup_trials
-        self.evaluations = evaluations
-        self.budget = budget
-        self.eval_freq = int(budget / evaluations)
-        self.num_eval_envs = num_eval_envs
-        self.num_eval_eps = num_eval_eps
-        self.timeout = timeout
+        # If param_dict is provided, use it to override defaults and explicit parameters
+        if param_dict is not None:
+            if not isinstance(param_dict, dict):
+                raise TypeError(
+                    f"param_dict must be a dictionary, got {type(param_dict)}"
+                )
+
+            # Extract and validate parameters from the dict
+            dict_params = self._extract_config_params(param_dict, Path("param_dict"))
+
+            # Merge explicit parameters with dict parameters (explicit params take precedence)
+            # This allows users to pass both param_dict and explicit parameters
+            final_params = {}
+
+            # Start with dict parameters
+            final_params.update(dict_params)
+
+            # Override with explicitly passed parameters (if they're not default values)
+            defaults = {
+                "num_trials": 100,
+                "num_jobs": 1,
+                "startup_trials": 5,
+                "evaluations": 2,
+                "budget": int(2e4),
+                "num_eval_envs": 5,
+                "num_eval_eps": 10,
+                "timeout": int(15 * 60),
+            }
+
+            explicit_params = {
+                "num_trials": num_trials,
+                "num_jobs": num_jobs,
+                "startup_trials": startup_trials,
+                "evaluations": evaluations,
+                "budget": budget,
+                "num_eval_envs": num_eval_envs,
+                "num_eval_eps": num_eval_eps,
+                "timeout": timeout,
+            }
+
+            # Only override with explicit params that differ from defaults
+            for param_name, explicit_value in explicit_params.items():
+                if explicit_value != defaults[param_name]:
+                    final_params[param_name] = explicit_value
+
+            # Set attributes from final merged parameters
+            self.num_trials = final_params.get("num_trials", num_trials)
+            self.num_jobs = final_params.get("num_jobs", num_jobs)
+            self.startup_trials = final_params.get("startup_trials", startup_trials)
+            self.evaluations = final_params.get("evaluations", evaluations)
+            self.budget = final_params.get("budget", budget)
+            self.num_eval_envs = final_params.get("num_eval_envs", num_eval_envs)
+            self.num_eval_eps = final_params.get("num_eval_eps", num_eval_eps)
+            self.timeout = final_params.get("timeout", timeout)
+        else:
+            # Original behavior when no param_dict is provided
+            self.num_trials = num_trials
+            self.num_jobs = num_jobs
+            self.startup_trials = startup_trials
+            self.evaluations = evaluations
+            self.budget = budget
+            self.num_eval_envs = num_eval_envs
+            self.num_eval_eps = num_eval_eps
+            self.timeout = timeout
+
+        # Calculate eval_freq after all parameters are set
+        self.eval_freq = (
+            int(self.budget / self.evaluations)
+            if self.evaluations and self.evaluations > 0
+            else None
+        )
 
     @classmethod
     def from_yaml(cls, path: Union[str, Path]) -> "TunerConfig":
@@ -119,7 +193,7 @@ class TunerConfig:
 
     @classmethod
     def _extract_config_params(
-        cls, yaml_data: Dict[str, Any], file_path: Path
+        cls, param_data: Dict[str, Any], file_path: Path
     ) -> Dict[str, Any]:
         """Extract and validate configuration parameters from YAML data."""
 
@@ -138,8 +212,8 @@ class TunerConfig:
         config_params = {}
 
         for param_name, spec in param_specs.items():
-            if param_name in yaml_data:
-                value = yaml_data[param_name]
+            if param_name in param_data:
+                value = param_data[param_name]
 
                 # Handle None values
                 if value is None:
@@ -176,7 +250,7 @@ class TunerConfig:
 
         # Check for unknown parameters
         known_params = set(param_specs.keys())
-        provided_params = set(yaml_data.keys())
+        provided_params = set(param_data.keys())
         unknown_params = provided_params - known_params
 
         if unknown_params:
