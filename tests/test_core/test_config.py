@@ -1,6 +1,6 @@
 from typing import ClassVar
 
-from hypertoolz.core.tuner_config import TunerConfig
+from hypertoolz.core.config import TunerConfig
 
 
 class DefaultTestConfig:
