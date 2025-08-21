@@ -56,7 +56,6 @@ class TunerConfig:
     >>> yaml_config = TunerConfig.from_yaml("/path/to/your_yaml.yaml")
     ```
 
-
     """
 
     def __init__(
