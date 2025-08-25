@@ -5,6 +5,8 @@ from typing import Any, Dict, List
 
 logger = logging.getLogger(__name__)
 
+"""File housing types used across the library"""
+
 
 class ValidationMode(Enum):
     """Validation strictness levels for parameter parsing"""
