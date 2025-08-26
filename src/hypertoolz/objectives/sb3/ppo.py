@@ -46,14 +46,6 @@ class PPOObjectiveSB3(SB3BaseObjective):
         Returns:
             PPO model instance
         """
-        # TODO install SB3 natively - likely to make the default RL lib in the ObjectiveFactory
-        # try:
-        #     from stable_baselines3 import PPO
-        # except ImportError:
-        #     raise ImportError(
-        #         "stable-baselines3 is required for PPOObjectiveSB3. "
-        #         "Install with: pip install hypertoolz[to-be-named]"
-        #     )
 
         # Merge hyperparameters with algorithm kwargs
         model_kwargs = {
