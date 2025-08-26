@@ -1,5 +1,5 @@
 from ..base import BaseObjective
 
 
-class DQNObjective(BaseObjective):
+class RayBaseObjective(BaseObjective):
     pass

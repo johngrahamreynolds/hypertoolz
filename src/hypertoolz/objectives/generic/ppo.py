@@ -1,2 +1,5 @@
-class PPOObjective:
+from ..base import BaseObjective
+
+
+class PPOObjective(BaseObjective):
     pass
