@@ -261,10 +261,12 @@ class EnvironmentResolver:
 
         # Try stable_baselines3 wrappers - this is our initial RL package integration
         try:
-            from stable_baselines3.common.env_util import make_atari_env
+            # from stable_baselines3.common.env_util import make_atari_env # TODO implement functional wrappers?
+            from stable_baselines3.common.atari_wrappers import AtariWrapper
             from stable_baselines3.common.vec_env import DummyVecEnv, VecFrameStack
 
             wrapper_map = {
+                "AtariWrapper": AtariWrapper,
                 "VecFrameStack": VecFrameStack,
                 "DummyVecEnv": DummyVecEnv,
             }
