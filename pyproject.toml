@@ -10,11 +10,13 @@ python = ">=3.12.0,<4"
 stable-baselines3 = "^2.7.0"
 sb3-contrib = "^2.7.0"
 optuna = "^4.4.0"
-gymnasium = "^1.2.0"
+gymnasium = {extras = ["atari", "mujoco", "roms", "toy-text"], version = "^1.2.0"}
 gym = "^0.26.2"
+pandas = "^2.3.1"
+numpy = "^2.3.2"
+swig = "^4.3.1"
 
 [tool.poetry.group.dev.dependencies]
-pytest = "6.2.4"
 pep8-naming = "^0.9.1"
 pytest-timeout = "^1.4.2"
 black = "24.2.0"
@@ -23,6 +25,7 @@ mypy = "^1.6.1"
 isort = "5.11.5"
 types_setuptools = "^57.4.4"
 twine = "^3.7.1"
+pytest = "^8.4.1"
 
 [build-system]
 requires = ["poetry-core"]
