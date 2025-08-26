@@ -1,0 +1,23 @@
+# Example yaml file for configuring a `TunerConfig`, used in unit testing
+
+# Number of optimization trials to run
+num_trials: 150
+
+# Number of parallel jobs for optimization
+num_jobs: 4
+
+# Number of initial random trials before using optimization strategy
+startup_trials: 10
+
+# Number of evaluation checkpoints during training
+evaluations: 5
+
+# Total training budget (environment steps)
+budget: 50000
+
+# Evaluation settings
+num_eval_envs: 8
+num_eval_eps: 20
+
+# Timeout in seconds (30 minutes)
+timeout: 1800
