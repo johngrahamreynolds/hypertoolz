@@ -22,7 +22,10 @@ class ObjectiveFactory:
 
     @classmethod
     def create_objective(cls, algorithm: str, library: str = "sb3", **kwargs):
-        """Orchestration layer chooses the right implementation with a default of stable_baselines3"""
+        """
+        ObjectiveFactory in the orchestration layer chooses the right algorithm+library objective
+        implementation with a default of stable_baselines3
+        """
 
         if algorithm not in cls._ALGORITHMS:
             raise ValueError(f"Algorithm {algorithm} not yet supported")
