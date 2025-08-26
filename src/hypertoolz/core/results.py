@@ -74,6 +74,17 @@ class OptimizationResults:
             ) from e
 
     @property
+    def best_trials(self) -> optuna.Trial:
+        """Get the best trial objects located in the Pareto front, the set of all Pareto efficient solutions"""
+        try:
+            return self.study.best_trials
+        except ValueError as e:
+            logger.error("No completed trials found in study")
+            raise ValueError(
+                "No best trials available - no trials completed successfully"
+            ) from e
+
+    @property
     def n_trials(self) -> int:
         """Total number of trials run"""
         return len(self.study.trials)
