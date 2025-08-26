@@ -6,7 +6,7 @@ Much of the code produced during hyperparameter tuning can be redundant across d
 
 The code herewithin can be thought to be akin to the same robust simplicity provided by the different packages of the Hugging Face ecosystem. Indeed, our project follows a very similar system architecture to `transformers` for transformer-based model training and inference.
 
-In summation, `hypertoolz` is focused on efficient simplicity for hyperparameter tuning across all possible RL scenarios; the goal is to make the simple case trivial and the complex case possible.
+`hypertoolz` is focused on efficient simplicity for hyperparameter tuning across all possible RL scenarios; the goal is to make the simple case trivial and the complex case possible.
 
 ## IMPORTANT NOTE
 
