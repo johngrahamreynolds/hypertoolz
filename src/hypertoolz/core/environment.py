@@ -242,7 +242,7 @@ class EnvironmentResolver:
                     module = __import__(module_path, fromlist=[class_name])
                     wrapper_class = getattr(module, class_name)
                 else:
-                    # Assume it's from stable_baselines3 or gymnasium
+                    # TODO Assume it's only from stable_baselines3 or gymnasium for initial env support
                     wrapper_class = self._find_wrapper_class(wrapper_name)
 
                 env = wrapper_class(env, **wrapper_kwargs)
