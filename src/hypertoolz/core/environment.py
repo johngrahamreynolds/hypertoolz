@@ -290,6 +290,8 @@ class EnvironmentResolver:
         except ImportError:
             pass
 
+        # TODO add code for integration of other RL Libraries
+
         raise ImportError(f"Could not find wrapper class: {wrapper_name}")
 
     def _is_env_instance(self, obj: Any) -> bool:
