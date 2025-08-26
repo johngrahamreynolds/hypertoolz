@@ -1,43 +1,56 @@
-# Hypertoolz
+# hypertoolz
 
-The `hypertoolz` package houses a set of simple, reusable modules for efficiently running hyperparameter tuning with Optuna on reinforcement learning (RL) optimization problems. 
+The `hypertoolz` package houses a set of simple, reusable modules for efficiently running hyperparameter tuning on reinforcement learning (RL) optimization problems with native integration with common RL libraries. 
 
-Much of the code produced during hyperparameter tuning with Optuna can be redundant - this package is designed to neatly remove much of this redundancy without eliminating any core abstraction across the spectrum of RL algorithms, the space of all possible hyperparameters, etc. The code herewithin can be thought to be akin to the same simplicity provided by something like Hugging Face `transformers` in circumstantial favor of the larger, more complete, but much more verbose `torch` atop which it is built.
+Much of the code produced during hyperparameter tuning can be redundant across different RL problems or vary significantly between common RL libraries (`stable_baselines3`, `ray`, `gym`/`gymnasium`, `torchrl`, etc.) - this package is designed to neatly remove much of this redundancy and library-specific variation without eliminating any core abstraction across the spectrum of RL algorithms, the space of hyperparameters, etc. The code herewithin can be thought to be akin to the same robust simplicity provided by the different packages of the Hugging Face ecosystem. Indeed, our project follows a very similar system architecture to `transformers` for transformer-based model training and inference.
 
-The goal of `hypertoolz` is efficient simplicity!
+In summation, `hypertoolz` is focused on efficient simplicity for hyperparameter tuning across all possible RL scenarios; the goal is to make the simple case trivial and the complex case possible.
 
 ## IMPORTANT NOTE
 
-This package is under active development. Its planned completion is by the end of the current month, August, 2025.
+This package is under active development. Suggestions for implementation of specific algorithms, integration with different RL libraries, and any other ideas are welcomed. This library has been designed to be open-source for the possibility of community collaboration in the same spirit of the various libraries included in the Hugging Face ecosystem.
 
 ### Installation
 
-The package is available on the Python Package Index and can be installed easily through the command line.
+The package is (almost) available (wheel construction still in progress) on the Python Package Index and can be installed easily through the command line.
 
 ```bash
-python3 -m pip3 install hypertoolz
+python3 -m pip install hypertoolz
 ```
 
+### `hypertoolz` usage across different levels of complexity
+
+#### Trivial Usage: The Simple Case
+
+    ```python
+
+    >>> from hypertoolz import optimize
+
+    >>>> ....
+    ```
+
+#### Experienced Usage: The Practioners Modification
+
+    ```python
+
+    >>> from hypertoolz import optimize
+    >>> from hypertoolz import TunerConfig
+
+    >>> param_range = {...}
+    ```
+
+#### Advanced Usage: The Researcher's Full Control
+
+    ```python
+    >>> from hypertoolz import HyperTuner
+    >>> from hypertoolz.core.config import TunerConfig
+    >>> from hypertoolz.parsers import ParamParser
+    >>> from hypertoolz.objectives.sb3_base import DQNObjectiveSB3
 
 
-### Introduction
+    >>> ....
+    ```
 
-Commonly, when using `optuna` for hyperparameter tuning, one constructs 4 core Python objects (functions, classes, etc.) that are largely redundant across different optimization problems. Roughly speaking, these entities are a `sampler`, a `callback`, an `objective fn`, and an `optimization loop`. Additionally, one needs default configuration variables which form the scaffolding of the RL model. The section below compares the succinct usage of `hypertoolz` to the traditional, verbose usage of `optuna` through a detailed sample problem.
+### System Architecture
 
-
-### Hypertoolz vs Optuna: A Full Tuning
-
-Imagine you want to train a model to excel at the `CartPole` environment task available in OpenAI's `Gym` (now maintained by the Farama Foundation in the `Gymnasium` package). You want to train your model to the best result possible, but you're unsure of what hyperparameters to choose. To confront this confusion, you make the wise decision to do an algorithmic search across the space of all possible hyperparameters to find what set(s) of parameters will most likely give you the best model after a full training.
-
-Before you begin, you write down a range of hyperparameters you're interested in tuning to be used for training your RL model. This initial set of parameters can be dependent upon the chosen method of RL. For this example, let's choose the `A2C` (Advantage Actor Critic) RL method. It must be noted, however, that `hypertoolz` can be efficiently used by any RL method native to RL packages like `stable_baselines3`, or even custom methods! Suppose now with the choice of the `A2C` method, you sketch the following set of possible hyperparameters defined as a Python `dict`:
-    
-```python
-config_params = 
-```
-
-Now that we have our set of all possible initial hyperparameters, we simply pump them into either of the hyperparameter tuning packages and watch the code magically (not magically at all) optimize our selection for eventual full training. 
-
-First we show how to do this with the simplicity of `hypertoolz` before comparing the much more tedious process of using `optuna`.
-
-#### Sample Tuning with Hypertoolz
-
+Add diagram describing various library layers and their underlying classes.
