@@ -53,4 +53,7 @@ python3 -m pip install hypertoolz
 
 ### System Architecture
 
-Add diagram describing various library layers and their underlying classes.
+<img width="3840" height="1777" alt="hypertoolz_system_preliminary" src="https://github.com/user-attachments/assets/38153ee6-3c52-4399-8f46-29ed2963d6d6" />
+
+
+Preliminary system design as a Mermaid diagram.
