@@ -2,7 +2,7 @@ import logging
 from typing import Any, Dict, List, Optional, Union
 
 from ..core.config import TunerConfig
-from ..core.types import OptunaParam, ParseResult, ValidationMode
+from ..core.hypertypes import OptunaParam, ParseResult, ValidationMode
 from ..parsers.base import BaseParser
 
 logger = logging.getLogger(__name__)

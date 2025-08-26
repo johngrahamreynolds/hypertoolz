@@ -3,7 +3,7 @@ from abc import ABC, abstractmethod
 from typing import Any, Callable, Dict, List, Optional
 
 from ..core.config import TunerConfig
-from ..core.types import OptunaParam, ParseResult, ValidationMode
+from ..core.hypertypes import OptunaParam, ParseResult, ValidationMode
 
 logger = logging.getLogger(__name__)
 

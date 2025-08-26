@@ -2,7 +2,7 @@ from typing import Any, Dict, List
 
 import pytest
 
-from hypertoolz.core.types import ParseResult
+from hypertoolz.core.hypertypes import ParseResult
 from hypertoolz.parsers.base import BaseParser
 
 
