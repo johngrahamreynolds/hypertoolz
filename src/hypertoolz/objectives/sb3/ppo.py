@@ -134,6 +134,11 @@ class PPOObjectiveSB3(SB3BaseObjective):
             if "policy_kwargs" not in transformed:
                 transformed["policy_kwargs"] = {}
             transformed["policy_kwargs"]["net_arch"] = net_arch
+        if "activation_fn" in transformed:
+            activation_fn = transformed.pop("activation_fn")
+            if "policy_kwargs" not in transformed:
+                transformed["policy_kwargs"] = {}
+            transformed["policy_kwargs"]["activation_fn"] = activation_fn
 
         return transformed
 
