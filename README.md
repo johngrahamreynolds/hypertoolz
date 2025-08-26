@@ -1,8 +1,10 @@
 # hypertoolz
 
-The `hypertoolz` package houses a set of simple, reusable modules for efficiently running hyperparameter tuning on reinforcement learning (RL) optimization problems with native integration with common RL libraries. 
+The `hypertoolz` package houses a set of simple, reusable modules for efficiently running hyperparameter tuning on reinforcement learning (RL) optimization problems with native integration of common RL libraries. 
 
-Much of the code produced during hyperparameter tuning can be redundant across different RL problems or vary significantly between common RL libraries (`stable_baselines3`, `ray`, `gym`/`gymnasium`, `torchrl`, etc.) - this package is designed to neatly remove much of this redundancy and library-specific variation without eliminating any core abstraction across the spectrum of RL algorithms, the space of hyperparameters, etc. The code herewithin can be thought to be akin to the same robust simplicity provided by the different packages of the Hugging Face ecosystem. Indeed, our project follows a very similar system architecture to `transformers` for transformer-based model training and inference.
+Much of the code produced during hyperparameter tuning can be redundant across different RL problems or vary significantly between common RL libraries (`stable_baselines3`, `ray`, `gym`/`gymnasium`, `torchrl`, etc.) - this package is designed to neatly remove much of this redundancy and library-specific variation without eliminating any core abstraction across the spectrum of RL algorithms, the space of hyperparameters, etc. 
+
+The code herewithin can be thought to be akin to the same robust simplicity provided by the different packages of the Hugging Face ecosystem. Indeed, our project follows a very similar system architecture to `transformers` for transformer-based model training and inference.
 
 In summation, `hypertoolz` is focused on efficient simplicity for hyperparameter tuning across all possible RL scenarios; the goal is to make the simple case trivial and the complex case possible.
 
@@ -20,36 +22,36 @@ python3 -m pip install hypertoolz
 
 ### `hypertoolz` usage across different levels of complexity
 
-#### Trivial Usage: "Anyone can cook (code)" - Chef Gusteau, almost
+#### Trivial Usage: "Anyone can code" - Chef Gusteau, almost
 
-    ```python
+```python
 
-    >>> from hypertoolz import optimize
+>>> from hypertoolz import optimize
 
-    >>>> ....
-    ```
+>>>> ....
+```
 
 #### Experienced Usage: The Practioners Modification
 
-    ```python
+```python
 
-    >>> from hypertoolz import optimize
-    >>> from hypertoolz import TunerConfig
+>>> from hypertoolz import optimize
+>>> from hypertoolz import TunerConfig
 
-    >>> param_range = {...}
-    ```
+>>> param_range = {...}
+```
 
 #### Advanced Usage: The Researcher's Full Control
 
-    ```python
-    >>> from hypertoolz import HyperTuner
-    >>> from hypertoolz.core.config import TunerConfig
-    >>> from hypertoolz.parsers import ParamParser
-    >>> from hypertoolz.objectives.sb3_base import DQNObjectiveSB3
+```python
+>>> from hypertoolz import HyperTuner
+>>> from hypertoolz.core.config import TunerConfig
+>>> from hypertoolz.parsers import ParamParser
+>>> from hypertoolz.objectives.sb3_base import DQNObjectiveSB3
 
 
-    >>> ....
-    ```
+>>> ....
+```
 
 ### System Architecture
 
