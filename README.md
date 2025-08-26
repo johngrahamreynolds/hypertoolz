@@ -20,7 +20,7 @@ python3 -m pip install hypertoolz
 
 ### `hypertoolz` usage across different levels of complexity
 
-#### Trivial Usage: The Simple Case
+#### Trivial Usage: "Anyone can cook (code)" - Chef Gusteau, almost
 
     ```python
 
